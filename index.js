@@ -18,7 +18,7 @@ restService.use(
 restService.use(bodyParser.json());
 
 
-restService.post("/echo", function(req, res) {
+restService.post("/TipOfDay", function(req, res) {
   var speech =
     req.body.result &&
     req.body.result.parameters &&
