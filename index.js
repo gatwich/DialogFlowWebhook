@@ -18,43 +18,18 @@ restService.use(
 restService.use(bodyParser.json());
 
 
-restService.post("/echo", function (req, res) {
-    
- 
-    return res.json({
-        "google": {
-            "richResponse": {
-                "items": [
-                  {
-                      "simpleResponse": {
-                          "textToSpeech": "From Alberta health Services tip of the day"
-                      }
-                  },
-                  {
-                      "mediaResponse": {
-                          "mediaType": "AUDIO",
-                          "mediaObjects": [
-                            {
-                                "name": "Alberta Health Services Wellness Tips",
-                                "description": "playing",
-                                "largeImage": {
-                                    "url": "https://capsconnections.ualberta.ca/caplet/Media/Logo?orgId=79&size=Large",
-                                    "accessibilityText": "..."
-                                },
-                                "contentUrl": "https://ahamms01.https.internapcdn.net/ahamms01/Content/AHS_Website/alexa/alexa-fs-less-than-zen.mp3"
-                            }
-                          ]
-                      }
-                  }
-                ],
-                "suggestions": [
-                  {
-                      "title": "chips"
-                  }
-                ]
-            }
-        }
-    });
+restService.post("/echo", function(req, res) {
+  var speech =
+    req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.echoText
+      ? req.body.result.parameters.echoText
+      : "Seems like some problem. Speak again.";
+  return res.json({
+    speech: speech,
+    displayText: speech,
+    source: "webhook-echo-sample"
+  });
 });
 
 restService.listen(process.env.PORT || 8000, function () {
