@@ -14,7 +14,7 @@ var RequestBody;
 
 
 var JsonRequest = require('request');
-request('https://www.albertahealthservices.ca/webapps/VoiceAppDev/ahs-alexa-news-dev/audioPOC/response-json.json', function (error, response, body) {
+JsonRequest('https://www.albertahealthservices.ca/webapps/VoiceAppDev/ahs-alexa-news-dev/audioPOC/response-json.json', function (error, response, body) {
   requestbody = body;
 });
 
@@ -30,12 +30,7 @@ restService.use(bodyParser.json());
 
 
 restService.post("/TipOfDay", function(req, res) {
-
-  return res.json({
-	  
-	RequestBody
-	  
-  });
+  return res.json({RequestBody});
 });
 
 restService.listen(process.env.PORT || 8000, function () {
